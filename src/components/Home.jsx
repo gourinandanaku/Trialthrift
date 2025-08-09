@@ -8,12 +8,12 @@ import {
   Button,
   Paper,
   Container,
-  IconButton,
-  Chip
+  IconButton
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme({
   palette: {
@@ -28,6 +28,7 @@ const theme = createTheme({
 });
 
 const Home = () => {
+  const navigate = useNavigate(); // ✅ Move inside component
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('All');
   const [role, setRole] = useState(null);
@@ -54,15 +55,19 @@ const Home = () => {
               EduThrift
             </Typography>
             <Box sx={{ display: 'flex', gap: 3 }}>
-              <Button>Home</Button>
+              <Button onClick={() => navigate('/')}>Home</Button>
 
               {/* Admin-only: Add User */}
-              {role === 'admin' && <Button>Add User</Button>}
+              {role === 'admin' && (
+                <Button onClick={() => navigate('/adduser')}>Add User</Button>
+              )}
 
               {/* Student-only: Add Product */}
-              {role === 'student' && <Button>Add Product</Button>}
+              {role === 'student' && (
+                <Button onClick={() => navigate('/add')}>Add Product</Button>
+              )}
 
-              <Button>Profile</Button>
+              <Button onClick={() => navigate('/profile')}>Profile</Button>
               <IconButton>
                 <AccountCircle />
               </IconButton>
@@ -91,41 +96,9 @@ const Home = () => {
             />
           </Paper>
         </Container>
-
-        {/* Filter Buttons */}
-        <Container maxWidth="lg" sx={{ mb: 3 }}>
-          <Typography variant="h6" sx={{ mb: 2 }}>
-            Browse by Category
-          </Typography>
-          <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
-            {['All', 'Books', 'Stationery', 'Notes', 'Past Exams'].map((type) => (
-              <Chip
-                key={type}
-                label={type}
-                color={filter === type ? 'primary' : 'default'}
-                onClick={() => setFilter(type)}
-                clickable
-              />
-            ))}
-          </Box>
-        </Container>
-
-        {/* Footer */}
-        <Container maxWidth="lg" sx={{ mt: 6, mb: 2, textAlign: 'center' }}>
-          <Box sx={{ display: 'flex', justifyContent: 'center', gap: 3, mb: 1 }}>
-            <Button>About</Button>
-            <Button>Contact</Button>
-            <Button>Terms of Service</Button>
-            <Button>Privacy Policy</Button>
-          </Box>
-          <Typography variant="body2" color="text.secondary">
-            ©2025 EduThrift. All rights reserved.
-          </Typography>
-        </Container>
       </Box>
     </ThemeProvider>
   );
 };
 
 export default Home;
-

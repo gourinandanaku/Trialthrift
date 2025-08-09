@@ -1,4 +1,5 @@
 
+import { Button,TextField, Typography } from "@mui/material";
 import { useState } from "react";
 
 function AddUser() {
@@ -41,29 +42,31 @@ function AddUser() {
 
   return (
     <div style={{ maxWidth: "400px", margin: "auto" }}>
-      <h2>Add New User</h2>
-      <input
+     <Typography variant="h5" align="center" gutterBottom>
+        Add New User
+      </Typography>
+      <TextField
         type="text"
         placeholder="Name"
         value={name}
         onChange={(e) => setName(e.target.value)}
         style={{ width: "100%", marginBottom: "8px" }}
       />
-      <input
+      <TextField
         type="email"
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         style={{ width: "100%", marginBottom: "8px" }}
       />
-      <input
+      <TextField
         type="password"
         placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         style={{ width: "100%", marginBottom: "8px" }}
       />
-      <input
+      <TextField
         type="text"
         placeholder="Phone"
         value={phone}
@@ -78,9 +81,9 @@ function AddUser() {
         <option value="student">Student</option>
         <option value="admin">Admin</option>
       </select>
-      <button onClick={handleAddUser} style={{ width: "100%" }}>
+      <Button onClick={handleAddUser} style={{ width: "100%" }}>
         Add User
-      </button>
+      </Button>
     </div>
   );
 }
