@@ -14,4 +14,4 @@ const Add = () => {
   )
 }
 
-export default Add
+export default Add;
